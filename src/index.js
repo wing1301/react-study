@@ -8,46 +8,29 @@ import ReactDOM from 'react-dom'
 
 
 
-class Clock extends React.Component {
+class Toogle extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {date:new Date()};
+        this.state = {isToogleOn: true};
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidMount() {
-        this.timerID = setInterval(
-            () => this.tick(),
-            1000
-        );
+    handleClick() {
+        this.setState(prevState => ({
+            isToogleOn : !prevState.isToogleOn
+        }));
     }
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-            date: new Date()
-        });
-    }
     render() {
         return (
-            <div>
-                <h1>Hello,World</h1>
-                <p>It is {this.state.date.toLocaleTimeString()}.</p>
-                <p>It is {this.state.date.toLocaleTimeString()}.</p>
-                <p>It is {this.state.date.toLocaleTimeString()}.</p>
-            </div>
-        )
+            <button onClick={this.handleClick}>
+                {this.state.isToogleOn ? "ON" : "OFF"}
+            </button>
+        );
     }
 }
 
-
-ReactDOM.render(
-    <Clock />,
+ReactDOM.render (
+    <Toogle />,
     document.getElementById("app")
 );
-
-// setInterval(tick,1000);
-
-
